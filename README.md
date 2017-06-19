@@ -59,18 +59,19 @@ CTS is set up to work within the limitations of the Star Citizen 2.6.3 Persisten
 
 # Instructions
 
-## Get it
-Download the zip of the latest release:
-https://github.com/scaires/crusader-transport-sim/releases/latest
-
-Or, if you prefer, clone the repo for the latest version: `git clone https://github.com/scaires/crusader-transport-sim.git`
-
-## Setup
-CTS is a node.js app, so you'll need to install the `nodejs` javascript runtime for your platform. You can get the installer from https://nodejs.org/ directly, but if you're on OSX,  I recommend using `homebrew` (`brew install node`). Treehouse has some great install guides for:
+## Prerequisites
+CTS is a node.js app, so you'll need to install the `nodejs` javascript runtime for your platform. You can get the installer from https://nodejs.org/ directly, but if you're on OSX, I recommend using `homebrew` (`brew install node`). Treehouse has some great install guides for `node.js`:
 
 **OSX** http://blog.teamtreehouse.com/install-node-js-npm-mac
 
 and **Windows** http://blog.teamtreehouse.com/install-node-js-npm-windows
+
+## Download
+Download the zip of the latest release, from:
+https://github.com/scaires/crusader-transport-sim/releases/latest
+Download `Source code (zip)` or `Source code (tar.gz)`, and unzip it to the folder you want to run CTS from.
+
+Or, if you prefer, clone the repo for the latest version: `git clone https://github.com/scaires/crusader-transport-sim.git`
 
 ## Launch
 You can launch CTS by opening the script for your platform:
@@ -86,7 +87,7 @@ If you want to play CTS alongside Star Citizen, you'll need to download and patc
 You can Star Citizen in a window, and alt-tab to CTS when you need to. Star Citizen takes controller input while alt-tabbed, so if you're using a joystick or gamepad this might be convenient. (I tried writing an AutoHotkey script to make this a little easier, but the app stopped getting key commands, sadly).
 
 ## Running CTS on a Tablet
-You can run CTS on a tablet if you can SSH into a computer with CTS installed. See [these instructions](#can-i-run-cts-on-my-tablet).
+You can run CTS on a tablet if you can SSH or Telnet into a computer with CTS installed. See [these instructions](#can-i-run-cts-on-my-tablet).
 
 # How to play
 
@@ -147,8 +148,16 @@ Yes! CTS is functional as a stand-alone game, and doesn't need Star Citizen to b
 ### Can you play multiplayer?
 Even though CTS is only running on one player's computer, you could use screenshare the terminal window through Hangouts or something similar, so your shipmates can see it. You could also transfer the savegame file for your company to another player to give them control.
 
-### Can I run CTS on my tablet?
-Yes, if you can SSH or otherwise connect to a command prompt on a computer with CTS installed, such as by using a terminal app (like [Terminus for iOS](https://itunes.apple.com/us/app/termius-ssh-shell-console-terminal/id549039908?mt=8) or [Terminus for Android](https://play.google.com/store/apps/details?id=com.server.auditor.ssh.client)). If connecting to a Windows machine, you might need to install an SSH server (eg, [Open SSH for Windows](https://winscp.net/eng/docs/guide_windows_openssh_server)). If connecting to an OSX machine, you'll need to enable 'Remote Login' in the Sharing Preferences, which will also display the local IP to connect to. In either case, you'll want to make sure that the folder where CTS is installed is easily accessible when you SSH into the computer, from the account you're connecting with. You might want a custom keyboard that has the number keys always displayed, too, if you want to avoid switching between numbers and letters for some CTS menu options. If you're playing in portrait mode, you might see a portion of the previous screen if your terminal is too tall. You can run CTS with the `--height` (or `-h`) argument, eg `./cts_osx --height 50`.
+### Can I run CTS on my tablet or phone?
+Yes, if you can SSH, telnet, or otherwise connect to a command prompt on a computer with CTS installed, you can use a terminal app (like [Terminus for iOS](https://itunes.apple.com/us/app/termius-ssh-shell-console-terminal/id549039908?mt=8) or [Terminus for Android](https://play.google.com/store/apps/details?id=com.server.auditor.ssh.client)) to connect to your computer, then launch CTS from the command line. 
+
+#### Windows
+If connecting to a Windows machine, you can configure and start a Telnet server ([Instructions](https://technet.microsoft.com/en-us/library/cc732046(v=ws.10).aspx)) or install and start an SSH server (eg, [Open SSH for Windows](https://winscp.net/eng/docs/guide_windows_openssh_server)). 
+
+#### OSX
+If connecting to an OSX machine, you'll need to enable 'Remote Login' in the Sharing Preferences, which will also display the local IP to connect to. 
+
+In either case, you'll want to make sure that the folder where CTS is installed is easily accessible when you SSH into the computer, from the account you're connecting with. After you're connected, navigate to the folder where CTS is located and launch either `cts_windows.bat` or `./cts_osx.command` from the terminal. You might want a custom keyboard that has the number keys always displayed, too, if you want to avoid switching between numbers and letters for some CTS menu options. If you're playing in portrait mode, you might see a portion of the previous screen if your terminal is too tall. You can run CTS with the `--height` (or `-h`) argument, eg `./cts_osx --height 50`.
 
 ![iOS CTS Screenshot](https://user-images.githubusercontent.com/478385/27258609-8c4b2c5c-53b3-11e7-9bdb-a5fc2130dacb.jpg)
 

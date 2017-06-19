@@ -32,6 +32,8 @@ if (argv.h > SCREEN_MIN_HEIGHT) {
   var SCREEN_CLEAR_LINES = argv.h;
 }
 
+var CANCEL_STRING = "Back";
+
 var CTS_VERSION_NAME = "1.0.0";
 var CTS_VERSION_ORDINAL = 10000;
 var CTS_MIN_SAVE_VERSION_ORDINAL = 10000;
@@ -50,6 +52,24 @@ var clearScreen = function() {
 		console.log('');
 	};
 	console.log('------------------');
+}
+
+var keyInPause = function() {
+	readlineSync.keyIn("Continue... (Hit space)", {
+	    limit:              " ",
+	    // -------- forced
+	    hideEchoBack:       true,
+	    mask:               ''
+	  });
+}
+
+var keyInYNBack = function(query) {
+	var result = readlineSync.keyInYN(query + " [y/n] or [0] (Back):", {guide:false});
+	if (result == '' && typeof result !== 'boolean') {
+		return -1;
+	} else {
+		return result;
+	}
 }
 
 var displayTimeout = function(times) {
@@ -278,7 +298,7 @@ var quantumTravelWithMap = function(locationId) {
 	data.player.quantum_location_id = locationId;
 	data.ship.quantum_location_id = locationId;
 	sleep(500);
-	readlineSync.keyInPause();
+	keyInPause();
 }
 
 var setDestination = function(quantumDestination) {
@@ -345,7 +365,7 @@ var startGameDialog = function() {
 	console.log();
 	console.log('------------------');
 	console.log();
-	readlineSync.keyInPause();
+	keyInPause();
 	clearScreen();
 
 	breakConsole.log("\n\"After a particularly deadly quarter in Crusader, with an unprecedented degree of ship collisions, suspected " +
@@ -356,7 +376,7 @@ var startGameDialog = function() {
 	console.log();
 	console.log('------------------');
 	console.log();
-	readlineSync.keyInPause();
+	keyInPause();
 	clearScreen();
 
 	breakConsole.log("\n\"Covalex Shipping today declared an indefinite pause on operations at Crusader, citing the fallout from the " +
@@ -366,7 +386,7 @@ var startGameDialog = function() {
 	console.log();
 	console.log('------------------');
 	console.log();
-	readlineSync.keyInPause();
+	keyInPause();
 	clearScreen();
 
 	breakConsole.log("\n\"More bad news for Crusader Industries, which experienced their second-deadliest day in 2947 today. " +
@@ -379,7 +399,7 @@ var startGameDialog = function() {
 	console.log();
 	console.log('------------------');
 	console.log();
-	readlineSync.keyInPause();
+	keyInPause();
 	clearScreen();
 
 	breakConsole.log("\n\"Representatives from Crusader Security acknowledged today that their response to the piracy boom near Crusader has " +
@@ -391,7 +411,7 @@ var startGameDialog = function() {
 	console.log();
 	console.log('------------------');
 	console.log();
-	readlineSync.keyInPause();
+	keyInPause();
 	clearScreen();
 
 	breakConsole.log("\n\"Food shortages on Orison, Crusader's largest floating city, have reached critical levels this week, as the last major " +
@@ -401,7 +421,7 @@ var startGameDialog = function() {
 	console.log();
 	console.log('------------------');
 	console.log();
-	readlineSync.keyInPause();
+	keyInPause();
 	clearScreen();
 
 	breakConsole.log("\nAfter spending several years as the first officer on an ore freighter, you're still short several hundred thousand " +
@@ -409,7 +429,7 @@ var startGameDialog = function() {
 	console.log();
 	console.log('------------------');
 	console.log();
-	readlineSync.keyInPause();
+	keyInPause();
 	clearScreen();
 
 	breakConsole.log("\nToday, in the G-LOC bar on ArcCorp, you were propositioned by a representative of NebTech, a small mining subsidiary of Crusader " +
@@ -421,7 +441,7 @@ var startGameDialog = function() {
 	console.log();
 	console.log('------------------');
 	console.log();
-	readlineSync.keyInPause();
+	keyInPause();
 	clearScreen();
 	
 	breakConsole.log("\nYour task will be to transport cargo to and from the planetary system's ports, as well as ships meeting you at rendezvous points. Most " +
@@ -430,7 +450,7 @@ var startGameDialog = function() {
 	console.log();
 	console.log('------------------');
 	console.log();
-	readlineSync.keyInPause();
+	keyInPause();
 	clearScreen();
 
 	breakConsole.log("\nIf you can pay off your loan on time and demonstrate that you've helped the situation on Crusader, Crusader Industries " +
@@ -441,7 +461,7 @@ var startGameDialog = function() {
 	console.log("Good luck, Captain.\n");
 	console.log('------------------');
 	console.log();
-	readlineSync.keyInPause();
+	keyInPause();
 }
 
 var victoryDialog = function() {
@@ -451,7 +471,7 @@ var victoryDialog = function() {
 		"Great work, Captain!\n");
 	console.log('------------------');
 	console.log();
-	readlineSync.keyInPause();
+	keyInPause();
 }
 
 var defeatDialog = function() {
@@ -461,7 +481,7 @@ var defeatDialog = function() {
 	console.log('THE END');
 	console.log('------------------');
 	console.log();
-	readlineSync.keyInPause();
+	keyInPause();
 }
 
 var incrementTickBy = function(incrementBy = 1) {
@@ -482,13 +502,13 @@ var incrementTick = function(initialTick = false) {
 		if (data.player.journal.tick % 24 == 0) {
 			clearScreen();
 			console.log("Company Report: End of " + data.player.journal.previousDayString(false).toLowerCase() + "\n");
-			readlineSync.keyInPause();
+			keyInPause();
 			clearScreen();
 			if (data.player.journal.isSandbox || (!data.player.journal.isSandbox && (!data.player.journal.hasEnded() || data.player.journal.isEndTick()))) {
 				data.player.journal.score = data.player.journal.updatedScore();
 			}
 			showCompanyLog(data.player.journal);
-			readlineSync.keyInPause();
+			keyInPause();
 
 			if (!data.player.journal.isSandbox) {
 				if (data.player.journal.hasEnded()) {
@@ -537,10 +557,10 @@ var menuSplash = function() {
 	console.log('Text-based hauling companion for Star Citizen v' + STAR_CITIZEN_VERSION_NAME);
 	console.log('------------------');
 	console.log('');
-	readlineSync.keyInPause();
+	keyInPause();
 	clearScreen();
 	breakConsole.log('Note: Use window dimensions of 80x24 for the best experience.\n\n(If your terminal is taller, run CTS with --height as the first argument, eg, \'.\/cts_osx --height 50\')\n');
-	readlineSync.keyInPause();
+	keyInPause();
 	pushMenu(menu.main);
 }
 
@@ -583,7 +603,7 @@ var menuMainNew = function() {
 	var choices = [];
 	choices = choices.concat(menu.main_new_career);
 	choices = choices.concat(menu.main_new_sandbox);
-	var index = readlineSync.keyInSelect(choices, 'Select a game type ', {cancel:'Cancel', guide:false});
+	var index = readlineSync.keyInSelect(choices, 'Select a game type ', {cancel:CANCEL_STRING, guide:false});
 	if (index == -1) {
 		popMenu();
 		return;
@@ -610,7 +630,7 @@ var menuMainNew = function() {
 			choices = choices.concat(new menu.Menu(fileObj.id, "" + fileObj.name + (fileObj.isSandbox ? " - SANDBOX, " : ", ") + dateString + " (" + fileObj.credits + " UEC, " + fileObj.ship_ids.length + " ships, " + elapsedString + ')'));
 		});
 
-		var index = readlineSync.keyInSelect(choices, 'Select a saved game to overwrite ', {cancel:'Cancel', guide:false});
+		var index = readlineSync.keyInSelect(choices, 'Select a saved game to overwrite ', {cancel:CANCEL_STRING, guide:false});
 		if (index == -1) {
 			popMenu();
 			return;
@@ -663,7 +683,7 @@ var menuMainNew = function() {
 	breakConsole.log("WARNING: Save game support is only partially implemented. When you EXIT and SAVE, your ships and company history " +
 		"will be saved, but all CONTRACTS will be ABANDONED.\n\nYou will be FINED for any cargo that has not been delivered when you SAVE. " +
 		"Make sure to deliver your cargo and complete your contracts before you EXIT and SAVE!\n");
-	readlineSync.keyInPause();
+	keyInPause();
 
 	pushMenu(menu.spawn);
 }
@@ -693,14 +713,14 @@ var menuMainLoad = function() {
 		choices = choices.concat("[No saved games]");
 	}
 
-	var index = readlineSync.keyInSelect(choices, 'Select a saved game ', {cancel:'Cancel', guide:false});
+	var index = readlineSync.keyInSelect(choices, 'Select a saved game ', {cancel:CANCEL_STRING, guide:false});
 	if (index == -1 || files.length == 0) {
 		popMenu();
 	} else {
 		clearScreen();
 		console.log(choices[index].display_name);
 		var subChoices = [menu.main_load_load, menu.main_load_delete];
-		var subIndex = readlineSync.keyInSelect(subChoices, 'Select an operation ', {cancel:'Cancel', guide:false});
+		var subIndex = readlineSync.keyInSelect(subChoices, 'Select an operation ', {cancel:CANCEL_STRING, guide:false});
 		if (subIndex == -1) {
 			return;
 		} else if (subChoices[subIndex].id == menu.main_load_load.id) {
@@ -714,7 +734,7 @@ var menuMainLoad = function() {
 				console.log('------------------');
 				store.remove(choices[index].id);
 				console.log("Save deleted\n");
-				readlineSync.keyInPause();
+				keyInPause();
 			}
 			return;
 		}
@@ -755,7 +775,7 @@ var menuScores = function() {
 		choices.push("[No company reports]");
 	} 
 
-	var index = readlineSync.keyInSelect(choices, 'Select a report ', {cancel:'Cancel', guide:false});
+	var index = readlineSync.keyInSelect(choices, 'Select a report ', {cancel:CANCEL_STRING, guide:false});
 	if (index == -1 || files.length == 0) {
 		popMenu();
 	} else {
@@ -764,7 +784,7 @@ var menuScores = function() {
 		tempJournal.load(saveData);
 		clearScreen();
 		showCompanyLog(tempJournal);
-		readlineSync.keyInPause();
+		keyInPause();
 	}
 }
 
@@ -775,7 +795,7 @@ var menuCredits = function() {
 	console.log();
 	console.log("Feedback and updates: https://github.com/firstrobotica/crusader-transport-sim");
 	console.log();
-	readlineSync.keyInPause();
+	keyInPause();
 	clearScreen();
 	console.log("Thanks to:");
 	console.log();
@@ -796,11 +816,11 @@ var menuCredits = function() {
 	console.log("  The fine folks of the (now retired) Drake Caterpillar Shipyard subforums");
 	console.log("  Xena and Ichi <3");
 	console.log();
-	readlineSync.keyInPause();
+	keyInPause();
 	clearScreen();
 	breakConsole.log("This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.")
 	console.log();
-	readlineSync.keyInPause();
+	keyInPause();
 	popMenu();
 }
 
@@ -921,7 +941,7 @@ var menuPortShipTerminals = function(portLocationId) {
 
 	choices.push(menu.port_ship_purchase_list);
 
-	var index = readlineSync.keyInSelect(choices, 'Request a ship ', {cancel:'Cancel', guide:false});
+	var index = readlineSync.keyInSelect(choices, 'Request a ship ', {cancel:CANCEL_STRING, guide:false});
 
 	if (index == -1) {
 		popMenu();
@@ -962,7 +982,7 @@ var menuPortShipTerminalDetails = function(portLocationId, shipObjectId) {
 	}
 	choices.push(menu.port_ship_terminal_details_sell);
 
-	var index = readlineSync.keyInSelect(choices, 'Select a ship option ', {cancel:'Cancel', guide:false});
+	var index = readlineSync.keyInSelect(choices, 'Select a ship option ', {cancel:CANCEL_STRING, guide:false});
 	if (index == -1) {
 		popMenu();
 	} else if (choices[index].id == menu.port_ship_terminal_details_request.id) {
@@ -1061,7 +1081,7 @@ var menuPortShipPurchaseList = function(portLocationId) {
 		choices.push("[No ships available for purchase]");
 	} 
 
-	var index = readlineSync.keyInSelect(choices, 'Purchase a ship ', {cancel:'Cancel', guide:false});
+	var index = readlineSync.keyInSelect(choices, 'Purchase a ship ', {cancel:CANCEL_STRING, guide:false});
 
 	if (index == -1) {
 		popMenu();
@@ -1091,7 +1111,7 @@ var menuPortShipPurchaseDetails = function(portLocationId, shipTypeId) {
 	var choices = [];
 	choices.push(menu.port_ship_purchase_details_purchase);
 
-	var index = readlineSync.keyInSelect(choices, 'Select a ship option ', {cancel:'Cancel', guide:false});
+	var index = readlineSync.keyInSelect(choices, 'Select a ship option ', {cancel:CANCEL_STRING, guide:false});
 	if (index == -1) {
 		popMenu();
 	} else if (choices[index].id == menu.port_ship_purchase_details_purchase.id) {
@@ -1150,7 +1170,7 @@ var menuConnectedPorts = function(portLocationId) {
 		choices.push("[No connected ports]");
 	}
 
-	var index = readlineSync.keyInSelect(choices, 'Select a port ', {cancel:'Cancel', guide:false});
+	var index = readlineSync.keyInSelect(choices, 'Select a port ', {cancel:CANCEL_STRING, guide:false});
 	if (index == -1) {
 		popMenu();
 	} else {
@@ -1168,12 +1188,12 @@ var menuDebtRepay = function() {
 	if (data.player.journal.getDebt() == 0) {
 		console.log("You have no debt to repay.");
 		console.log('------------------');
-		readlineSync.keyInPause();
+		keyInPause();
 		popMenu();
 	} else if (data.player.journal.getCredits() == 0) {
 		console.log("You have no UEC with which to repay your debt.");
 		console.log('------------------');
-		readlineSync.keyInPause();
+		keyInPause();
 		popMenu();
 	} else {
 		console.log('Your credits: ' + data.player.journal.creditsString());
@@ -1317,7 +1337,7 @@ var menuComms = function() {
 		choices = shipcontacts;
 	}
 
-	var index = readlineSync.keyInSelect(choices, 'Select a contact ', {cancel:'Cancel', guide:false});
+	var index = readlineSync.keyInSelect(choices, 'Select a contact ', {cancel:CANCEL_STRING, guide:false});
 	if (index == -1) {
 		popMenu();
 	} else {
@@ -1395,7 +1415,7 @@ var menuNavigation = function(isShipMenu) {
 		}
 	}
 
-	var index = readlineSync.keyInSelect(choices, 'Select a destination ', {cancel:'Cancel', guide:false});
+	var index = readlineSync.keyInSelect(choices, 'Select a destination ', {cancel:CANCEL_STRING, guide:false});
 	if (index == -1) {
 		popMenu();
 	} else if (choices[index].id == menu.navigation_map_crusader.id ||
@@ -1441,8 +1461,13 @@ var menuNavigation = function(isShipMenu) {
 			} else {
 				var rendezvousQuantumLocation = quantum.quantumIdToLocation(choices[index].quantum_destination_id);
 				console.log('------------------');
-				console.log("To rendezvous with " + shipcontact.shipContactIdToShipContact(choices[index].shipcontact_id).name + ':\n\n1) Align to quantum location ' + rendezvousQuantumLocation + '.\n2) Move towards it until you are ' + choices[index].distance_from_dest + 'km away.\n');
-				readlineSync.keyInPause();
+				console.log("To rendezvous with " + shipcontact.shipContactIdToShipContact(choices[index].shipcontact_id).name + ":\n\n" +
+					'1) Align to quantum location' + rendezvousQuantumLocation + ".\n" + 
+					'2) Move towards it until you are ' + choices[index].distance_from_dest + 'km away.\n' +
+					'3) Stop your ship.\n' + 
+					'4) Select "Rendezvous with..."\n' +
+					'5) Enter your current distance in km to the quantum location.\n');
+				keyInPause();
 				clearScreen();
 				setDestination(choices[index]);
 				popMenuTo(menu.ship);
@@ -1461,7 +1486,7 @@ var menuNavigationPortDestinations = function(location) {
 		choices = choices.concat(location.portDestinations());
 	}
 
-	var index = readlineSync.keyInSelect(choices, 'Select a port destination ', {cancel:'Cancel', guide:false});
+	var index = readlineSync.keyInSelect(choices, 'Select a port destination ', {cancel:CANCEL_STRING, guide:false});
 	if (index == -1) {
 		popMenu();
 	} else {
@@ -1569,7 +1594,7 @@ var menuNavigationLandingPadDestinations = function(destination) {
 		console.log('');
 		console.log(portLocation.display_name + ':');
 
-		var index = readlineSync.keyInSelect(choices, 'Select a landing pad ', {cancel:'Cancel', guide:false});
+		var index = readlineSync.keyInSelect(choices, 'Select a landing pad ', {cancel:CANCEL_STRING, guide:false});
 		if (index == -1) {
 			popMenu();
 		} else {
@@ -1637,21 +1662,21 @@ var menuNavigationLandingPadDestinations = function(destination) {
 // Map option
 var menuCrusaderMap = function() {
 	map.showCrusaderMap(data.player.quantum_location_id);
-	readlineSync.keyInPause();
+	keyInPause();
 	popMenu();
 }
 
 // Map option
 var menuStantonMap = function() {
 	map.showStantonMap();
-	readlineSync.keyInPause();
+	keyInPause();
 	popMenu();
 }
 
 // Map option
 var menuStarMap = function() {
 	map.showStarMap();
-	readlineSync.keyInPause();
+	keyInPause();
 	popMenu();
 }
 
@@ -1663,7 +1688,7 @@ var menuQuantum = function() {
 	
 	var choices = quantum.quantumIdToLocation(data.player.quantum_location_id).quantumDestinations();
 	
-	var index = readlineSync.keyInSelect(choices, 'Select a travel destination ', {cancel:'Cancel', guide:false});
+	var index = readlineSync.keyInSelect(choices, 'Select a travel destination ', {cancel:CANCEL_STRING, guide:false});
 	if (index == -1) {
 		popMenu();
 	} else {
@@ -1681,7 +1706,7 @@ var menuQuantum = function() {
 			popMenuTo(menu.ship);
 		} else if (choices[index].is_blocked) {
 			console.log('------------------');
-			console.log('Cannot travel to ' + quantum.quantumIdToLocation(choices[index].id) + ", route is obstructed.");
+			console.log('Cannot travel to ' + quantum.quantumIdToLocation(choices[index].id) + ", route is obstructed.\n\nTravel to a different location first.");
 			displayTimeout(3);
 			clearScreen();
 			menuQuantum();
@@ -1790,7 +1815,7 @@ var menuContracts = function(menuId, jobBoardId) {
 		}
 	}
 
-	var index = readlineSync.keyInSelect(choices, 'Select a contract ', {cancel:'Cancel', guide:false});
+	var index = readlineSync.keyInSelect(choices, 'Select a contract ', {cancel:CANCEL_STRING, guide:false});
 	if (index == -1) {
 		popMenu();
 	} else {
@@ -1853,7 +1878,7 @@ var menuContractBoards = function() {
 		choices = choices.concat(_jobBoards);
 	}
 
-	var index = readlineSync.keyInSelect(choices, 'Select a contract board ', {cancel:'Cancel', guide:false});
+	var index = readlineSync.keyInSelect(choices, 'Select a contract board ', {cancel:CANCEL_STRING, guide:false});
 	if (index == -1) {
 		popMenu();
 	} else {
@@ -1873,7 +1898,7 @@ var menuContractsDetails = function(contractId) {
 	if (!data.player.journal.contractIdIsAccepted(contractId)) {
 		// Nothing to do unless the contract has been accepted.
 		console.log('');
-		readlineSync.keyInPause();
+		keyInPause();
 		popMenu();
 	} else {
 		var choices = [];
@@ -1887,7 +1912,7 @@ var menuContractsDetails = function(contractId) {
 			choices.push(menu.ship_contracts_details_abandon);
 		}
 
-		var index = readlineSync.keyInSelect(choices, 'Select a contract option ', {cancel:'Cancel', guide:false});
+		var index = readlineSync.keyInSelect(choices, 'Select a contract option ', {cancel:CANCEL_STRING, guide:false});
 		if (index == -1) {
 			popMenu();
 		} else {
@@ -1935,7 +1960,7 @@ var menuContractsDetails = function(contractId) {
 
 					data.player.journal.completeContractId(contractId);
 					displayTimeout(3);
-					readlineSync.keyInPause();
+					keyInPause();
 				}
 
 				if (peekMenuTo(menu.ship_contracts)) {
@@ -1970,7 +1995,7 @@ var menuContractsDetails = function(contractId) {
 
 					data.player.journal.abandonContractId(contractId);
 					displayTimeout(3);
-					readlineSync.keyInPause();
+					keyInPause();
 				}
 
 				if (peekMenuTo(menu.ship_contracts)) {
@@ -2000,7 +2025,7 @@ var menuContractsDetailsAvailable = function(contractId, jobBoardId) {
 	var choices = [];
 	choices.push(menu.ship_contracts_details_available_accept);
 
-	var index = readlineSync.keyInSelect(choices, 'Select a contract option ', {cancel:'Cancel', guide:false});
+	var index = readlineSync.keyInSelect(choices, 'Select a contract option ', {cancel:CANCEL_STRING, guide:false});
 
 	if (index == -1) {
 		popMenu();
@@ -2066,7 +2091,7 @@ var menuCargo = function() {
 		choices.push(new menu.Menu("ship_cargo_available", _shipcontact.name + " (" + _cargo.length + " containers)"));
 	}
 
-	var index = readlineSync.keyInSelect(choices, 'Select cargo ', {cancel:'Cancel', guide:false});
+	var index = readlineSync.keyInSelect(choices, 'Select cargo ', {cancel:CANCEL_STRING, guide:false});
 	if (index == -1) {
 		popMenu();
 	} else {
@@ -2106,7 +2131,7 @@ var menuCargoHold = function(cargoHoldIndex) {
 		}
 	}
 
-	var index = readlineSync.keyInSelect(choices, 'Select cargo ', {cancel:'Cancel', guide:false});
+	var index = readlineSync.keyInSelect(choices, 'Select cargo ', {cancel:CANCEL_STRING, guide:false});
 	if (index == -1) {
 		popMenu();
 	} else {
@@ -2158,7 +2183,7 @@ var menuCargoAvailable = function(destinationId) {
 		choices = choices.concat(_containerGroups);
 	}
 
-	var index = readlineSync.keyInSelect(choices, 'Select cargo ', {cancel:'Cancel', guide:false});
+	var index = readlineSync.keyInSelect(choices, 'Select cargo ', {cancel:CANCEL_STRING, guide:false});
 	if (index == -1) {
 		popMenu();
 	} else {
@@ -2210,7 +2235,7 @@ var menuCargoDetails = function(containerGroup, fromCargoHoldIndex, isFromShip) 
 		choices.push(menu.ship_cargo_details_jettison);
 	}
 
-	var index = readlineSync.keyInSelect(choices, 'Select cargo option ', {cancel:'Cancel', guide:false});
+	var index = readlineSync.keyInSelect(choices, 'Select cargo option ', {cancel:CANCEL_STRING, guide:false});
 	if (index == -1) {
 		popMenu();
 	} else {
@@ -2414,7 +2439,7 @@ var menuCargoDetails = function(containerGroup, fromCargoHoldIndex, isFromShip) 
 
 var menuCompanyLog = function() {
 	showCompanyLog(data.player.journal);
-	readlineSync.keyInPause();
+	keyInPause();
 	popMenu();
 }
 
@@ -2454,7 +2479,7 @@ var menuRespawn = function() {
 		console.log('Respawning...')
 		displayTimeout(3);
 		if (totalAbandonedContracts > 0) {
-			readlineSync.keyInPause();
+			keyInPause();
 		}
 
 		incrementTickBy(24);
@@ -2499,7 +2524,7 @@ var requestShipDialog = function(portLocationId, shipObjectId) {
 		var landing_pad = landingPad.landingPadIdToLocation(landingPadDestination.id);
 		return landing_pad.canAcceptSize(ship_type.size);
 	}));
-	var index = readlineSync.keyInSelect(choices, 'Which landing pad did it arrive at? ', {cancel:'Cancel', guide:false});
+	var index = readlineSync.keyInSelect(choices, 'Which landing pad did it arrive at? ', {cancel:CANCEL_STRING, guide:false});
 	if (index == -1) {
 		return false;
 	}
@@ -2557,7 +2582,7 @@ var cargoHoldChoiceDialog = function() {
 		choices.push(new menu.Menu("ship_cargo_hold", hold.toString()));
 	});
 
-	var index = readlineSync.keyInSelect(choices, 'Select cargo hold ', {cancel:'Cancel', guide:false});
+	var index = readlineSync.keyInSelect(choices, 'Select cargo hold ', {cancel:CANCEL_STRING, guide:false});
 	return index;
 }
 
@@ -2735,7 +2760,10 @@ var cargoChoiceDialog = function(containerGroup, targetFreeSpace, targetSize) {
 var exitDialog = function() {
 	clearScreen();
 	breakConsole.log('If you save, your ship, credits, and contract history will be saved, but your accepted contracts and cargo will be abandoned.\n');
-	var confirmSave = readlineSync.keyInYNStrict("Save before exiting?", {guide:true})
+	var confirmSave = keyInYNBack("Save before exiting?")
+	if (confirmSave == -1) {
+		return false;
+	}
 	console.log('------------------');
 	var confirmExit = readlineSync.keyInYNStrict("Exit?", {guide:true})
 	if (confirmExit) {		

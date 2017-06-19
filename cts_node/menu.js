@@ -74,7 +74,7 @@ var _menus = {
 	ship_cargo_details_jettison: new Menu("ship_cargo_details_jettison", "Jettison"),
 	ship_company_log: new Menu("ship_company_log", "Company log"),
 	ship_respawn: new Menu("ship_respawn", "Respawn"),
-	ship_visit_port: new Menu("ship_visit_port", "Visit port"),
+	ship_visit_port: new Menu("ship_visit_port", "Visit port (Exit ship)"),
 }
 
 var _menuIdToMenu = function(menuId) {

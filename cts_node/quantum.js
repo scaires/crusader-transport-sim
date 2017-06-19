@@ -108,7 +108,7 @@ function QuantumDestination(id, distance_km, is_blocked) {
 
 QuantumDestination.prototype.toString = function() {
 	var location = _quantum_locations[this.id];
-	return location.display_name + (this.is_blocked ? " - BLOCKED" : "") + " (" + this.distance_km + "km" + (this.distance_km < 1000 ? ", Time: 0H" : "") + ")";
+	return location.display_name + (this.is_blocked ? " - OBSTRUCTED" : "") + " (" + this.distance_km + "km" + (this.distance_km < 1000 ? ", Time: 0H" : "") + ")";
 };
 
 function RendezvousDestination(shipcontact_id, quantum_location_id, quantum_destination_id, distance_km) {
