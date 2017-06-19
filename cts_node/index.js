@@ -799,6 +799,7 @@ var menuCredits = function() {
 	clearScreen();
 	console.log("Thanks to:");
 	console.log();
+	console.log("  AGTMADCAT");
 	console.log("  Alysianah Noire\'s World of Star Citizen");
 	console.log("  Anseki's readline-sync")
 	console.log("  AstroNavis Merchant Advanced board game");
@@ -1462,7 +1463,7 @@ var menuNavigation = function(isShipMenu) {
 				var rendezvousQuantumLocation = quantum.quantumIdToLocation(choices[index].quantum_destination_id);
 				console.log('------------------');
 				console.log("To rendezvous with " + shipcontact.shipContactIdToShipContact(choices[index].shipcontact_id).name + ":\n\n" +
-					'1) Align to quantum location' + rendezvousQuantumLocation + ".\n" + 
+					'1) Align to quantum location ' + rendezvousQuantumLocation + ".\n" + 
 					'2) Move towards it until you are ' + choices[index].distance_from_dest + 'km away.\n' +
 					'3) Stop your ship.\n' + 
 					'4) Select "Rendezvous with..."\n' +

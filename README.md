@@ -19,9 +19,9 @@ Text-based hauling companion for Star Citizen v2.6.3 by SteveCC
 ```  
 
 * [About](#about)
-* [Media](#media)
 * [Instructions](#instructions)
 * [How to play](#how-to-play)
+* [Media](#media)
 * [FAQ](#faq)
 * [Version history](#version-history)
 * [Credits](#credits)
@@ -60,7 +60,7 @@ CTS is set up to work within the limitations of the Star Citizen 2.6.3 Persisten
 # Instructions
 
 ## Prerequisites
-CTS is a node.js app, so you'll need to install the `nodejs` javascript runtime for your platform. You can get the installer from https://nodejs.org/ directly, but if you're on OSX, I recommend using `homebrew` (`brew install node`). Treehouse has some great install guides for `node.js`:
+CTS is a node.js app, so you'll need to install the `node.js` javascript runtime for your platform. You can get the installer from https://nodejs.org/ directly, but if you're on OSX, I recommend using `homebrew` (`brew install node`). Treehouse has some great install guides for `node.js`:
 
 **OSX** http://blog.teamtreehouse.com/install-node-js-npm-mac
 
@@ -74,11 +74,11 @@ Download `Source code (zip)` or `Source code (tar.gz)`, and unzip it to the fold
 Or, if you prefer, clone the repo for the latest version: `git clone https://github.com/scaires/crusader-transport-sim.git`
 
 ## Launch
-You can launch CTS by opening the script for your platform:
+You can launch CTS by opening the script for your platform from the directory where you unzipped it:
 **Windows:** `cts_windows.bat`
 **OSX:** `cts_osx.command`
 
-When you run CTS, the script will first run `npm install` to download the CTS dependencies to the `node_modules` folder, which requires an internet connection for the first time. Afterwards, it'll configure your terminal to the correct dimensions and launch CTS. (If you want to skip the terminal window configuration, you can run CTS directly from the `cts_node` folder with the command `node index.js`)
+When you run CTS, the script will first run `npm install` to download the CTS dependencies to the `node_modules` folder, which requires an internet connection for the first time. Afterwards, it'll configure your terminal to the preferred dimensions and launch CTS. (If you want to skip the terminal window configuration and dependency installation, you can run CTS directly from the `cts_node` folder with the command `node index.js`)
 
 ## Get Star Citizen 2.6.3
 If you want to play CTS alongside Star Citizen, you'll need to download and patch Star Citizen to the latest version, 2.6.3: [https://robertsspaceindustries.com/download](https://robertsspaceindustries.com/download). You'll also need an account and a ship package, if you don't already have one.
@@ -87,24 +87,28 @@ If you want to play CTS alongside Star Citizen, you'll need to download and patc
 You can Star Citizen in a window, and alt-tab to CTS when you need to. Star Citizen takes controller input while alt-tabbed, so if you're using a joystick or gamepad this might be convenient. (I tried writing an AutoHotkey script to make this a little easier, but the app stopped getting key commands, sadly).
 
 ## Running CTS on a Tablet
-You can run CTS on a tablet if you can SSH or Telnet into a computer with CTS installed. See [these instructions](#can-i-run-cts-on-my-tablet).
+It's currently a workaround, but you can run CTS on a tablet if you can SSH or Telnet into a computer with CTS installed. See [these instructions](#can-i-run-cts-on-my-tablet-or-phone).
 
 # How to play
 
+These instructions assume running CTS alongside Star Citizen. For a video demonstration, check out the [gameplay video](#gameplay-video).
+
+In Crusader Transport Simulator, to simulate running a small cargo hauling company, you'll take actions in CTS alongside those in Star Citizen, earning UEC which you can spend in CTS and that's used to calculate your score. For example, to quantum to a location, you'll select the `Quantum travel` option in CTS when you initiate quantum travel in Star Citizen. To transfer cargo to your ship, you'll first open your cargo hold in Star Citizen, then in CTS, you'll select `Transfer to ship...`, and wait for the cargo to finish transferring in CTS. To purchase a ship in CTS that's on your Star Citizen account, you'll first buy the ship in CTS using your UEC, then spawn that ship from the Star Citizen ship terminals. As you complete contracts, you'll earn UEC, which you'll use to pay off your debt and purchase new ships. Note: only ships that have cargo capacity are currently included, but I'd like to add the rest.
+
 ## Quickstart
+
+See [User Guide](GUIDE.md).
 
 ## Recovering from bugs
 
-## User Guide
-
-See the [User Guide](GUIDE.md)
+It happens for any number of reasons: Your client crashed, your connection was lost to the server, your ship flung you into space when you tried to EVA back in, or your accelerated on its own and slammed into Port Olisar. Respawning in CTS assumed you respawned for a valid gameplay reason rather than an error out of your control. If an error does happen, the best way to recover is to get Star Citizen back into the state it was before you encountered the error. For example, if you were loading cargo at Comm 306 and were disconnected from the server, you can relaunch Star Citizen, spawn your ship again, and head back to Comm 306 before resuming CTS. Because the save feature in CTS isn't fully implemented, however, if you need to exit at this point, your contracts won't be saved.
 
 # Media
 Note: These were composited together while running both CTS and Star Citizen in different windows.
 
 ## Gameplay video
-A 52 minute gameplay demonstration:
-https://www.youtube.com/watch?v=pH9Yjqv5uJc
+52 minute gameplay demonstration:
+https://www.youtube.com/watch?v=U4tU0gxQ5ZI
 
 ## gfycats
 ![https://gfycat.com/EnragedPerfumedBunting](https://thumbs.gfycat.com/EnragedPerfumedBunting-size_restricted.gif)
@@ -149,17 +153,22 @@ Yes! CTS is functional as a stand-alone game, and doesn't need Star Citizen to b
 Even though CTS is only running on one player's computer, you could use screenshare the terminal window through Hangouts or something similar, so your shipmates can see it. You could also transfer the savegame file for your company to another player to give them control.
 
 ### Can I run CTS on my tablet or phone?
-Yes, if you can SSH, telnet, or otherwise connect to a command prompt on a computer with CTS installed, you can use a terminal app (like [Terminus for iOS](https://itunes.apple.com/us/app/termius-ssh-shell-console-terminal/id549039908?mt=8) or [Terminus for Android](https://play.google.com/store/apps/details?id=com.server.auditor.ssh.client)) to connect to your computer, then launch CTS from the command line. 
-
-#### Windows
-If connecting to a Windows machine, you can configure and start a Telnet server ([Instructions](https://technet.microsoft.com/en-us/library/cc732046(v=ws.10).aspx)) or install and start an SSH server (eg, [Open SSH for Windows](https://winscp.net/eng/docs/guide_windows_openssh_server)). 
+Yes, if you can SSH (OSX) or Telnet (Windows) to a command prompt on a computer with CTS installed, you can use a terminal app on your device to connect to your computer, then launch CTS from the command line.
 
 #### OSX
-If connecting to an OSX machine, you'll need to enable 'Remote Login' in the Sharing Preferences, which will also display the local IP to connect to. 
+If connecting to an OSX machine that has CTS installed, you'll be able to connect via SSH from your tablet. You'll need to enable 'Remote Login' in the Sharing Preferences, which will also display the local IP to connect to. You'll need to connect using the login credentials for an OSX account. Using SSH from OSX/Linux is is more robust than telnet support to Windows, so there are more workable app options; I have been using Termius: [Termius for iOS (Free)](https://itunes.apple.com/us/app/termius-ssh-shell-console-terminal/id549039908?mt=8) or [Termius for Android (Free)](https://play.google.com/store/apps/details?id=com.server.auditor.ssh.client)).
+
+![SSH/iOS CTS Screenshot](https://user-images.githubusercontent.com/478385/27258609-8c4b2c5c-53b3-11e7-9bdb-a5fc2130dacb.jpg)
+
+#### Linux
+I haven't tried connecting to a Linux computer, but I imagine it would be similar to the OSX setup and that SSH would be preferred.
+
+#### Windows
+If connecting to a Windows machine, you can configure and start a Telnet server ([Instructions](https://technet.microsoft.com/en-us/library/cc732046(v=ws.10).aspx)), then connect to it with an app on your device. The only one I've found on iPad that displays CTS running on a Windows server correctly is [iTerminal (Free)](https://itunes.apple.com/us/app/iterminal-ssh-telnet-client/id581455211), though it's not ideal (only about half the screen is visible if the keyboard is up, and there's no portrait support). The upside is, however, that you can serve CTS off of the same computer you're running Star Citizen from.
+
+![Telnet/iOS CTS Screenshot](https://user-images.githubusercontent.com/478385/27303969-5a063806-54f1-11e7-96f8-ac6d2bd78f51.png)
 
 In either case, you'll want to make sure that the folder where CTS is installed is easily accessible when you SSH into the computer, from the account you're connecting with. After you're connected, navigate to the folder where CTS is located and launch either `cts_windows.bat` or `./cts_osx.command` from the terminal. You might want a custom keyboard that has the number keys always displayed, too, if you want to avoid switching between numbers and letters for some CTS menu options. If you're playing in portrait mode, you might see a portion of the previous screen if your terminal is too tall. You can run CTS with the `--height` (or `-h`) argument, eg `./cts_osx --height 50`.
-
-![iOS CTS Screenshot](https://user-images.githubusercontent.com/478385/27258609-8c4b2c5c-53b3-11e7-9bdb-a5fc2130dacb.jpg)
 
 ## Gameplay
 
@@ -194,7 +203,7 @@ One of the dependencies, `deasync`, that controls the sleep function, needs to b
 
 # Version history
 
-## v1.0 (6/17/2017)
+## v1.0.0 (6/19/2017)
 * Initial Release
 
 # Credits
@@ -204,6 +213,8 @@ by Steve Caires (RSI: SteveCC)
 Feedback and updates: https://github.com/scaires/crusader-transport-sim
 
 ### Thanks to:
+
+AGTMADCAT
 
 Alysianah Noire\'s World of Star Citizen
 
