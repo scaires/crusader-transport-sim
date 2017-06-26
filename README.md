@@ -18,6 +18,8 @@
 Text-based hauling companion for Star Citizen v2.6.3 by SteveCC
 ```  
 
+For questions, feedback, and discussion, check out the [CTS discord](https://discord.gg/HABqM8E).
+
 * [About](#about)
 * [Instructions](#instructions)
 * [How to play](#how-to-play)
@@ -27,6 +29,9 @@ Text-based hauling companion for Star Citizen v2.6.3 by SteveCC
 * [Credits](#credits)
 
 # About
+
+## CTS on YouTube
+For an introduction to CTS, as well as an installation guide and tutorial videos, check out the [YouTube playlist](https://www.youtube.com/playlist?list=PLh8DS9twpRSCsP-uFNloe9ZDkonpI_7ZC).
 
 ## What
 Crusader Transport Simulator is a text-based companion for Star Citizen cargo hauling, which you can play either standalone or alongside Star Citizen's Persistent Universe. Get randomly generated contracts from job boards, quantum travel to destinations around Crusader, rendezvous and dock with imaginary ships to load and offload imaginary cargo, land at stations to load and offload said cargo, earn a payout based on the distance you moved the cargo and how much you moved, and a bonus if you delivered it on time. Use the UEC you earn to "buy" the ships you already own (or ones that you don't, if you want to pretend your Aurora is a Caterpillar).
@@ -59,8 +64,10 @@ CTS is set up to work within the limitations of the Star Citizen 2.6.3 Persisten
 
 # Instructions
 
+[Watch the installation video](https://www.youtube.com/watch?v=09gATXh_SYE&list=PLh8DS9twpRSCsP-uFNloe9ZDkonpI_7ZC&index=2)
+
 ## Prerequisites
-CTS is a node.js app, so you'll need to install the `node.js` javascript runtime for your platform. You can get the installer from https://nodejs.org/ directly, but if you're on OSX, I recommend using `homebrew` (`brew install node`). Treehouse has some great install guides for `node.js`:
+CTS is a node.js app, so you'll need to install the `node.js` javascript runtime for your platform. You can install either the "Most Users" version (currently v6.11.0) or the "Latest Features" version (currently v8.1.2). You can get the installer from https://nodejs.org/ directly, but if you're on OSX, I recommend using `homebrew` (`brew install node`). Treehouse has some great install guides for `node.js`:
 
 **OSX** http://blog.teamtreehouse.com/install-node-js-npm-mac
 
@@ -91,7 +98,11 @@ It's currently a workaround, but you can run CTS on a tablet if you can SSH or T
 
 # How to play
 
-These instructions assume running CTS alongside Star Citizen. For a video demonstration, check out the [gameplay video](#gameplay-video).
+These instructions assume running CTS alongside Star Citizen. For a video demonstration, check out these tutorials:
+
+[How to play: Your first contract](https://www.youtube.com/watch?v=ckZc1t7p41w&index=3&list=PLh8DS9twpRSCsP-uFNloe9ZDkonpI_7ZC)
+
+[How to play: Rendezvous with ships](https://www.youtube.com/watch?v=kCWEWp4-TkY&index=4&list=PLh8DS9twpRSCsP-uFNloe9ZDkonpI_7ZC)
 
 In Crusader Transport Simulator, to simulate running a small cargo hauling company, you'll take actions in CTS alongside those in Star Citizen, earning UEC which you can spend in CTS and that's used to calculate your score. For example, to quantum to a location, you'll select the `Quantum travel` option in CTS when you initiate quantum travel in Star Citizen. To transfer cargo to your ship, you'll first open your cargo hold in Star Citizen, then in CTS, you'll select `Transfer to ship...`, and wait for the cargo to finish transferring in CTS. To purchase a ship in CTS that's on your Star Citizen account, you'll first buy the ship in CTS using your UEC, then spawn that ship from the Star Citizen ship terminals. As you complete contracts, you'll earn UEC, which you'll use to pay off your debt and purchase new ships. Note: only ships that have cargo capacity are currently included, but I'd like to add the rest.
 
@@ -106,9 +117,10 @@ It happens for any number of reasons: Your client crashed, your connection was l
 # Media
 Note: These were composited together while running both CTS and Star Citizen in different windows.
 
-## Gameplay video
-52 minute gameplay demonstration:
-https://www.youtube.com/watch?v=U4tU0gxQ5ZI
+## Videos
+[What is CTS?](https://www.youtube.com/watch?v=Krcoke-Idek&index=1&list=PLh8DS9twpRSCsP-uFNloe9ZDkonpI_7ZC)
+
+[52 minute playthrough](https://www.youtube.com/watch?v=U4tU0gxQ5ZI)
 
 ## gfycats
 ![https://gfycat.com/EnragedPerfumedBunting](https://thumbs.gfycat.com/EnragedPerfumedBunting-size_restricted.gif)
@@ -203,6 +215,10 @@ One of the dependencies, `deasync`, that controls the sleep function, needs to b
 
 # Version history
 
+## v1.0.0c (6/26/2017)
+* Added Discord link to main menu
+* Updated Readme
+
 ## v1.0.0 (6/19/2017)
 * Initial Release
 
@@ -219,6 +235,8 @@ AGTMADCAT
 Alysianah Noire\'s World of Star Citizen
 
 Anseki's readline-sync
+
+Antagonist
 
 AstroNavis Merchant Advanced board game
 

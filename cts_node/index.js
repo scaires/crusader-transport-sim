@@ -23,6 +23,7 @@ var breakConsole = require('./breakConsole')(80);
 var sleep = require('system-sleep');
 var readlineSync = require('readline-sync');
 var moment = require('moment');
+var opn = require('opn');
 const argv = require('yargs').argv
 
 var SCREEN_MIN_HEIGHT = 24;
@@ -34,7 +35,7 @@ if (argv.h > SCREEN_MIN_HEIGHT) {
 
 var CANCEL_STRING = "Back";
 
-var CTS_VERSION_NAME = "1.0.0";
+var CTS_VERSION_NAME = "1.0.0c";
 var CTS_VERSION_ORDINAL = 10000;
 var CTS_MIN_SAVE_VERSION_ORDINAL = 10000;
 var STAR_CITIZEN_VERSION_NAME = "2.6.3"
@@ -580,6 +581,8 @@ var menuMain = function() {
 	
 	choices = choices.concat(menu.main_scores);
 
+	choices = choices.concat(menu.main_community);
+
 	choices = choices.concat(menu.main_credits);
 
 	var index = readlineSync.keyInSelect(choices, 'Select a menu option ', {cancel:'Exit', guide:false});
@@ -801,7 +804,8 @@ var menuCredits = function() {
 	console.log();
 	console.log("  AGTMADCAT");
 	console.log("  Alysianah Noire\'s World of Star Citizen");
-	console.log("  Anseki's readline-sync")
+	console.log("  Anseki's readline-sync");
+	console.log("  Antagonist");
 	console.log("  AstroNavis Merchant Advanced board game");
 	console.log("  Drake Interplanetary Ship Designer Josh C.");
 	console.log("  Elijah Rockseeker");
@@ -824,6 +828,22 @@ var menuCredits = function() {
 	keyInPause();
 	popMenu();
 }
+
+var menuCommunity = function() {
+	console.log('Crusader Transport Simulator Community Discord:');
+	console.log();
+	console.log('https://discord.gg/HABqM8E');
+	console.log();
+	confirmOpen = readlineSync.keyInYNStrict("Open Discord invite in browser? ", {guide:true});	
+
+	if (confirmOpen) {
+		opn('https://discord.gg/HABqM8E', {
+			wait: false,
+		});
+	}
+	popMenu();
+}
+
 
 var menuSpawn = function() {
 	var index = readlineSync.keyInSelect(quantum.quantumIdsToLocations(quantum.spawn_location_ids), 'Where did you spawn? ', {cancel:false, guide:false});
@@ -2923,6 +2943,9 @@ while (looping) {
 			break;
 		case menu.main_credits.id:
 			menuCredits();
+			break;
+		case menu.main_community.id:
+			menuCommunity();
 			break;
 		case menu.spawn.id:
 			menuSpawn();
